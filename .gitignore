@@ -52,3 +52,10 @@ docs/_build/
 
 # PyBuilder
 target/
+
+#PyCharm
+.idea/
+
+#venv
+bin/
+pyvenv.cfg
