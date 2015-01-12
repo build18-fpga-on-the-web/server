@@ -35,6 +35,9 @@ class WebSocketChatHandler(WebSocketHandler):
     def on_close(self):
         clients.remove(self)
 
+    def check_origin(self, origin):
+        return True
+
 def main():
     app = Application(
         [
@@ -46,6 +49,8 @@ def main():
         )
     app.listen(8081)
     IOLoop.instance().start()
+
+
 
 if __name__ == "__main__":
     main()
