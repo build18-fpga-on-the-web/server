@@ -5,12 +5,12 @@
     <title> FPGA On The Web </title>
     <link rel="stylesheet" href="{{ static_url("style.css") }}" />
   </head>
-  <body>
+  <body class="noselect">
     <div id="status">
     </div>
     <div id="buttons">
 
-      <div id="ledr">
+      <div id="ledr" class="group">
         {% for i in range(num["ledr"]) %}
           <div id="ledr{{ i }}wrapper" class="wrapper">
             <div id="ledr{{ i }}" class="ledr buttons" ></div>
@@ -22,23 +22,35 @@
         {% end %}
       </div>
 
-       <div id="sw">
+       <div id="sw" class="group">
         {% for i in range(num["sw"]) %}
-          <div id="sw{{ i }}" class="sw buttons" ></div>
+          <div id="ledr{{ i }}wrapper" class="wrapper">
+            <div id="sw{{ i }}" class="sw buttons" ></div>
+            <br>
+            SW{{ i }}
+          </div>
         {% end %}
       </div>
 
-      <div id="ledg">
+      <div id="ledg" class="group">
         {% for i in range(num["ledg"]) %}
-          <div id="ledg{{ i }}" class="ledg buttons" ></div>
+          <div id="ledg{{ i }}wrapper" class="wrapper">
+            <div id="ledg{{ i }}" class="ledg buttons" ></div>
+            <br>
+            LED
+            <br>
+            G{{ i }}
+          </div>
         {% end %}
       </div>
 
-
-
-      <div id="key">
+      <div id="key" class="group">
         {% for i in range(num["key"]) %}
-          <div id="key{{ i }}" class="key buttons" ></div>
+          <div id="ledg{{ i }}wrapper" class="wrapper">
+            <div id="key{{ i }}" class="key buttons" ></div>
+            <br>
+            KEY{{ i }}
+          </div>
         {% end %}
       </div>
 
