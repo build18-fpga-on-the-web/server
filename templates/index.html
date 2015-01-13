@@ -9,31 +9,38 @@
     <div id="status">
     </div>
     <div id="buttons">
-      <p> ledr </p>
-      {% for i in range(num["ledr"]) %}
-        <div id="ledr{{ i }}" class="ledr" ></div>
-      {% end %}
 
-      <p> ledg </p>
-      {% for i in range(num["ledg"]) %}
-        <div id="ledg{{ i }}" class="ledg" ></div>
-      {% end %}
+      <div id="ledr">
+        {% for i in range(num["ledr"]) %}
+          <div id="ledr{{ i }}" class="ledr buttons" ></div>
+        {% end %}
+      </div>
 
-      <p> sw </p>
-      {% for i in range(num["sw"]) %}
-        <div id="sw{{ i }}" class="sw" ></div>
-      {% end %}
+       <div id="sw">
+        {% for i in range(num["sw"]) %}
+          <div id="sw{{ i }}" class="sw buttons" ></div>
+        {% end %}
+      </div>
 
-      <p> key </p>
-      {% for i in range(num["key"]) %}
-        <div id="key{{ i }}" class="key" ></div>
-      {% end %}
+      <div id="ledg">
+        {% for i in range(num["ledg"]) %}
+          <div id="ledg{{ i }}" class="ledg buttons" ></div>
+        {% end %}
+      </div>
+
+
+
+      <div id="key">
+        {% for i in range(num["key"]) %}
+          <div id="key{{ i }}" class="key buttons" ></div>
+        {% end %}
+      </div>
 
       <p> hex </p>
       {% for i in range(num["hex"]) %}
         <p> hex{{ i }} </p>
         {% for j in range(num["segments"]) %}
-        <div id="hex{{ i }}-{{ j }}" class="hex" ></div>
+        <div id="hex{{ i }}-{{ j }}" class="hex buttons" ></div>
         {% end %}
       {% end %}
     </div>
