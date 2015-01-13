@@ -32,7 +32,6 @@ class WebSocketChatHandler(WebSocketHandler):
         clients.append(self)
         data = {"inputs":inputs, "outputs":outputs}
         self.write_message(json_encode(data))
-
     def on_message(self, message):
         print("Message from client")
         print(message)
@@ -47,6 +46,7 @@ class WebSocketChatHandler(WebSocketHandler):
             except ValueError:
                 print("int failed on", message)
             inputs[group][i] = 1 - inputs[group][i]
+            outputs["ledr"] = inputs["sw"]
         data = {"inputs":inputs, "outputs":outputs}
         for client in clients:
             client.write_message(json_encode(data))
