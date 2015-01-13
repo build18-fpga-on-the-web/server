@@ -9,22 +9,22 @@ import os.path
 clients = []
 outputs = {}
 inputs = {}
+num = {"ledr":18, "ledg":9, "hex":8, "segments":7, "sw":18, "key":4}
 
 def init_outputs():
-    global outputs
     outputs["ledr"] = [0]*18
     outputs["ledg"] = [0]*9
     outputs["hex"] = [[0]*7 for _ in range(8)]
 
 def init_inputs():
-    global inputs
-    outputs["sw"] = [0]*18
-    outputs["key"] = [0]*4
+    inputs["sw"] = [0]*18
+    inputs["key"] = [0]*4
 
 class IndexHandler(RequestHandler):
     @asynchronous
     def get(request):
-        request.render("index.html", data=data)
+        data = {"inputs":inputs, "outputs":outputs}
+        request.render("index.html", data=data, num=num)
 
 class WebSocketChatHandler(WebSocketHandler):
     def open(self, *args):

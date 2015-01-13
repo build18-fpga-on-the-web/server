@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
       var ws;
+
+
       var box = $("#box");
       $("[id^=box]").click(function() {
           console.log("clicked box!");

@@ -3,13 +3,46 @@
   <head>
     <meta charset="utf-8">
     <title> FPGA On The Web </title>
-    <link rel="stylesheet" href="{{ static_url("boxes.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("style.css") }}" />
   </head>
   <body>
-    {% for i, fill in enumerate(data) %}
-    <div id="box{{ i }}" class="box" ></div>
+    <p> ledr </p>
+    {% for i in range(num["ledr"]) %}
+      <div id="ledr{{ i }}" class="ledr" ></div>
     {% end %}
+
+    <p> ledg </p>
+    {% for i in range(num["ledg"]) %}
+      <div id="ledg{{ i }}" class="ledg" ></div>
+    {% end %}
+
+    <p> sw </p>
+    {% for i in range(num["sw"]) %}
+      <div id="sw{{ i }}" class="sw" ></div>
+    {% end %}
+
+    <p> key </p>
+    {% for i in range(num["key"]) %}
+      <div id="key{{ i }}" class="key" ></div>
+    {% end %}
+
+    <p> hex </p>
+    {% for i in range(num["hex"]) %}
+      <p> hex{{ i }} </p>
+      {% for j in range(num["segments"]) %}
+      <div id="hex{{ i }}-{{ j }}" class="hex" ></div>
+      {% end %}
+    {% end %}
+    <br>
+    <h> Data </h>
+    <p>
+      {{ data }}
+    </p>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
-    <script src="{{ static_url("boxes.js") }}"></script>
+    <script src="{{ static_url("constants.js") }}"></script>
+    <script src="{{ static_url("ws.js") }}"></script>
+    <script src="{{ static_url("board.js") }}"></script>
+    <script src="{{ static_url("main.js") }}"></script>
   </body>
 </html>
