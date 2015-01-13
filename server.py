@@ -67,6 +67,7 @@ def main():
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
+        debug=True
         )
     app.listen(8081)
     print("Listening on port 8081")

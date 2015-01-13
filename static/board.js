@@ -25,6 +25,7 @@ function update_fills(data) {
   update_fill(inputs["key"], "#key", "grey");
 }
 
+
 var board = {
   init: function() {
     console.log("Initializing board");
@@ -41,6 +42,10 @@ var board = {
     console.log("Opening WebSocket");
     console.log(url);
     ws = new WebSocket(url);
+    ws.onopen = function(e) {
+      $("#status").text("Status: Live");
+      $("#status").css('color', 'LawnGreen');
+    };
     ws.onmessage = function(e) {
       console.log("new message");
       console.log(e);
@@ -52,7 +57,8 @@ var board = {
 
   ws.onclose = function(e) {
     console.log("WebSocket Closed");
-    alert("Websocket closed");
+    $("#status").text("Status: Dead");
+    $("#status").css('color', 'red');
     init_ws(url);
   };
 }

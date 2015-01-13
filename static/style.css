@@ -1,12 +1,17 @@
-div {
+#buttons > div {
     border-style:solid;
     width:10px;
     height:10px;
     display: inline-block;
 }
 
+#status {
+	margin-top:20px;
+	margin-left:157px;
+	font-weight: bold;
+}
 .ledr {
-	
+
     border-style:solid;
     width:10px;
     height:10px;
