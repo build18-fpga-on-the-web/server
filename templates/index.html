@@ -12,7 +12,13 @@
 
       <div id="ledr">
         {% for i in range(num["ledr"]) %}
-          <div id="ledr{{ i }}" class="ledr buttons" ></div>
+          <div id="ledr{{ i }}wrapper" class="wrapper">
+            <div id="ledr{{ i }}" class="ledr buttons" ></div>
+            <br>
+            LED
+            <br>
+            R{{ i }}
+          </div>
         {% end %}
       </div>
 
