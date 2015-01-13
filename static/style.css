@@ -34,14 +34,20 @@
 	margin-top: 50px;
 }
 
+.sw {
+    border:none;
+    background-color: grey;
+}
+
 .switch {
     border:solid black;
     height: 30px;
+    width: 15px;
+    margin: auto;
 }
 
 .on {
-    border:solid black;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #ledg {
