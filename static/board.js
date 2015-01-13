@@ -52,6 +52,7 @@ var board = {
 
   ws.onclose = function(e) {
     console.log("WebSocket Closed");
+    alert("Websocket closed");
     init_ws(url);
   };
 }
