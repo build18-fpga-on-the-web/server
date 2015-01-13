@@ -34,6 +34,16 @@
 	margin-top: 50px;
 }
 
+.switch {
+    border:solid black;
+    height: 30px;
+}
+
+.on {
+    border:solid black;
+    margin-top: 10px;
+}
+
 #ledg {
 	width:370px;
 	margin-top: 60px;

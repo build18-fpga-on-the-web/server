@@ -31,6 +31,7 @@ var board = {
     console.log("Initializing board");
     this.init_ws(WS_URL);
     $(".sw").click(function() {
+      $(this).toggleClass('on');
       ws.send(this.id);
     });
     $(".key").click(function() {
