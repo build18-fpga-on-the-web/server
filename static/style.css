@@ -15,10 +15,14 @@
 	width:900px;
 	margin:auto;
 	margin-top: 287px;
-	display: flex;
-    justify-content: space-between;
+	/*display: flex;
+    justify-content: space-between;*/
 }
 
+.ledr {
+	display:inline-block;
+	margin-left:20px;
+}
 #sw {
 	width:875px;
 	margin:auto;
@@ -43,9 +47,6 @@
     justify-content: space-between;
 }
 
-.ledr {
-	margin:auto;
-}
 body {
     background-image: url("testbg.png");
     background-color: #1a2b41;
