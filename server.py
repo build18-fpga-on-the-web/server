@@ -12,7 +12,7 @@ inputs = {}
 num = {"ledr":18, "ledg":9, "hex":8, "segments":7, "sw":18, "key":4}
 
 def init_outputs():
-    outputs["ledr"] = [0]*18
+    outputs["ledr"] = [1]*18
     outputs["ledg"] = [1]*9
     outputs["hex"] = [[1]*7 for _ in range(8)]
 

@@ -41,6 +41,7 @@
     border-radius: 100px;
     width:15px;
     height:15px;
+    margin-top:15px;
 }
 
 .switch {
@@ -51,9 +52,9 @@
     margin: auto;
 }
 
-.on {
+/*.on {
     margin-top: 15px;
-}
+}*/
 
 #ledg {
 	width:370px;

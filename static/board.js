@@ -21,8 +21,24 @@ function update_fills(data) {
   {
     update_fill(hex[i], "#hex"+i+"-", "red");
   }
-  // update_fill(inputs["sw"], "#sw", "grey");
+  //update_fill(inputs["sw"], "#sw", "grey");
   update_fill(inputs["key"], "#key", "grey");
+  for (var i=0; i<inputs["sw"].length; i++){
+    if (inputs["sw"][i]){
+      if (!$("#inner_sw"+i).hasClass('on')){
+       $("#inner_sw"+i).animate({ 'marginTop': "-=15" });
+       $("#inner_sw"+i).toggleClass('on');
+     }
+    }
+    else {
+      if ($("#inner_sw"+i).hasClass('on')){
+       $("#inner_sw"+i).animate({ 'marginTop': "+=15" });
+       $("#inner_sw"+i).toggleClass('on');
+     }
+        
+      }
+    
+  }
 }
 
 
@@ -31,15 +47,6 @@ var board = {
     console.log("Initializing board");
     this.init_ws(WS_URL);
     $(".switch").click(function() {
-      if ( $( this ).children().hasClass( 'on' ) ){
-
-      $(this).children().animate({ 'marginTop': "-=15" });
-    }
-      else {
-        $(this).children().animate({ 'marginTop': "+=15" });
-        
-      }
-      $(this).children().toggleClass('on');
       ws.send(this.id);
     });
     $(".key").click(function() {
