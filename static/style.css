@@ -14,6 +14,7 @@
 .group {
     margin:auto;
     display: flex;
+    display: -webkit-flex;
     justify-content: space-between;
 }
 
@@ -25,7 +26,7 @@
 }
 
 #ledr {
-    width:70%;
+    width:370px;
     margin-top: 287px;
 }
 
