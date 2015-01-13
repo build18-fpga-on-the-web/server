@@ -38,10 +38,14 @@
 .sw {
     border:none;
     background-color: grey;
+    border-radius: 100px;
+    width:15px;
+    height:15px;
 }
 
 .switch {
     border:solid black;
+    border-radius: 10px;
     height: 30px;
     width: 15px;
     margin: auto;
