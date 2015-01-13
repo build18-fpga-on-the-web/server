@@ -4,3 +4,145 @@ div {
     height:10px;
     display: inline-block;
 }
+
+.ledr {
+	
+    border-style:solid;
+    width:10px;
+    height:10px;
+    display: block;
+}
+
+
+#ledr0{
+	position: relative;
+	left: -427px;
+	top: 278px;
+	margin: 0 auto;
+}
+
+#ledr1{
+	position: relative;
+	left: -377px;
+	top: 262px;
+	margin: 0 auto;
+}
+
+#ledr2{
+	position: relative;
+	left: -327px;
+	top: 246px;
+	margin: 0 auto;
+}
+
+#ledr3{
+	position: relative;
+	left: -277px;
+	top: 230px;
+	margin: 0 auto;
+}
+
+#ledr4{
+	position: relative;
+	left: -227px;
+	top: 214px;
+	margin: 0 auto;
+}
+
+#ledr5{
+	position: relative;
+	left: -177px;
+	top: 198px;
+	margin: 0 auto;
+}
+
+#ledr6{
+	position: relative;
+	left: -127px;
+	top: 182px;
+	margin: 0 auto;
+}
+
+#ledr7{
+	position: relative;
+	left: -77px;
+	top: 166px;
+	margin: 0 auto;
+}
+
+#ledr8{
+	position: relative;
+	left: -27px;
+	top: 150px;
+	margin: 0 auto;
+}
+
+#ledr9{
+	position: relative;
+	left: 23px;
+	top: 134px;
+	margin: 0 auto;
+}
+
+#ledr10{
+	position: relative;
+	left: 73px;
+	top: 118px;
+	margin: 0 auto;
+}
+
+#ledr11{
+	position: relative;
+	left: 123px;
+	top: 102px;
+	margin: 0 auto;
+}
+
+#ledr12{
+	position: relative;
+	left: 173px;
+	top: 86px;
+	margin: 0 auto;
+}
+
+#ledr13{
+	position: relative;
+	left: 223px;
+	top: 70px;
+	margin: 0 auto;
+}
+
+#ledr14{
+	position: relative;
+	left: 273px;
+	top: 54px;
+	margin: 0 auto;
+}
+
+#ledr15{
+	position: relative;
+	left: 323px;
+	top: 38px;
+	margin: 0 auto;
+}
+
+#ledr16{
+	position: relative;
+	left: 373px;
+	top: 22px;
+	margin: 0 auto;
+}
+
+#ledr17{
+	position: relative;
+	left: 423px;
+	top: 6px;
+	margin: 0 auto;
+}
+
+body {
+    background-image: url("testbg.png");
+    background-color: #1a2b41;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
