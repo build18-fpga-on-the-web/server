@@ -31,6 +31,14 @@ var board = {
     console.log("Initializing board");
     this.init_ws(WS_URL);
     $(".switch").click(function() {
+      if ( $( this ).children().hasClass( 'on' ) ){
+
+      $(this).children().animate({ 'marginTop': "-=15" });
+    }
+      else {
+        $(this).children().animate({ 'marginTop': "+=15" });
+        
+      }
       $(this).children().toggleClass('on');
       ws.send(this.id);
     });
