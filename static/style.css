@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: DS-DIGI;
-    src: url(DS-DIGI.TTF);
+    src: url(dsdigi.tff.TTF);
 }
 
 h1 {
@@ -17,7 +17,6 @@ h1 {
     height:100px;
     background-color: grey;
 }
-
 
 .leds{
     border: none;
