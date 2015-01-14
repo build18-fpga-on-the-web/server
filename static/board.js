@@ -1,6 +1,7 @@
 /*
  * board.js - manage board
  */
+var data;
 
 function update_fill(data, class_name, color) {
   for (var i=0; i<data.length; i++)
@@ -41,38 +42,127 @@ function update_fills(data) {
   }
 }
 
+down = {};
+function keyPress(e){
+  switch (e.keyCode){
+    case 49:
+      if (down['49'] == null){
+        down['49'] = true;
+        ws.send("key"+(e.keyCode-49)); 
+      }
+      break;
+    case 50:
+      if (down['50'] == null){
+        ws.send("key"+(e.keyCode-49)); 
+        down['50'] = true;
+      }
+      break;
+    case 51:
+      if (down['51'] == null){
+        ws.send("key"+(e.keyCode-49)); 
+        down['51'] = true;
+      }
+      break;
+    case 52:
+      if (down['52'] == null){
+        ws.send("key"+(e.keyCode-49)); 
+        down['52'] = true;
+      }
+      break;
+  }
+}
+
+function keyRelease(e){
+  if (e.keyCode>=49 && e.keyCode<=52){
+    ws.send("key"+(e.keyCode-49));
+    down[e.keyCode] = null;
+  }
+}
+
+function buttonPress(e){
+  switch (e.target.id){
+    case "key0":
+      if (down['49'] == null){
+        down['49'] = true;
+        ws.send("key0"); 
+      }
+      break;
+    case "key1":
+      if (down['50'] == null){
+        ws.send("key1"); 
+        down['50'] = true;
+      }
+      break;
+    case "key2":
+      if (down['51'] == null){
+        ws.send("key2"); 
+        down['51'] = true;
+      }
+      break;
+    case "key3":
+      if (down['52'] == null){
+        ws.send("key3"); 
+        down['52'] = true;
+      }
+      break;
+  }
+}
+
+function buttonRelease(e){
+  if (e.target.id == "key0"){
+    ws.send("key0");
+    down['49'] = null; 
+  }
+  else if (e.target.id == "key1"){
+    ws.send("key1");
+    down['50'] = null;
+  }
+  else if (e.target.id == "key2"){
+    ws.send("key2");
+    down['51'] = null;
+  }
+
+  else if (e.target.id == "key3"){
+    ws.send("key3");
+    down['52'] = null;
+  }
+}
+
+
 
 var board = {
   init: function() {
-    console.log("Initializing board");
+    //console.log("Initializing board");
     this.init_ws(WS_URL);
     $(".switch").click(function() {
       ws.send(this.id);
     });
-    $(".key").click(function() {
-      ws.send(this.id);
-    });
+    $(document).keydown(keyPress);
+    $(document).keyup(keyRelease);
+    $(document).mousedown(buttonPress);
+    $(document).mouseup(buttonRelease);
+
   },
 
   init_ws: function(url) {
-    console.log("Opening WebSocket");
-    console.log(url);
+    //console.log("Opening WebSocket");
+    //console.log(url);
     ws = new WebSocket(url);
     ws.onopen = function(e) {
       $("#status").text("Status: Live");
       $("#status").css('color', 'LawnGreen');
     };
     ws.onmessage = function(e) {
-      console.log("new message");
-      console.log(e);
-      console.log(typeof(e.data));
-      console.log(e.data);
-      var data = JSON.parse(e.data);
+      // console.log("new message");
+      // console.log(e);
+      // console.log(typeof(e.data));
+      // console.log(e.data);
+      data = JSON.parse(e.data);
       update_fills(data);
   };
 
   ws.onclose = function(e) {
-    console.log("WebSocket Closed");
+    //console.log("WebSocket Closed");
     $("#status").text("Status: Dead");
     $("#status").css('color', 'red');
     init_ws(url);
