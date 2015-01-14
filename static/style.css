@@ -1,7 +1,16 @@
-.buttons{
-    border:solid black;
+.leds{
+    border:solid clear;
     width:10px;
     height:10px;
+    display: inline-block;
+}
+
+.key{
+    margin-top: -40px;
+    border:solid blue;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
     display: inline-block;
 }
 
@@ -45,7 +54,7 @@
 }
 
 .switch {
-    border:solid black;
+    border:solid white;
     border-radius: 10px;
     height: 30px;
     width: 15px;
@@ -76,8 +85,8 @@
 }
 
 body {
-    background-image: url("testbg.png");
+    background-image: url("bg.png");
     background-color: #1a2b41;
-    background-repeat: no-repeat;
+    
     background-position: center top;
 }
