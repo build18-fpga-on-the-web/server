@@ -17,10 +17,34 @@ function update_fills(data) {
   update_fill(outputs["ledr"], "#ledr", "red");
   update_fill(outputs["ledg"], "#ledg", "green");
   var hex = outputs["hex"];
+  console.log(hex);
+  console.log(hex.length);
   for (var i=0; i<hex.length; i++)
   {
-    update_fill(hex[i], "#hex"+i+"-", "red");
+    console.log("i");
+    console.log(i);
+    for (var segment=0; segment<7; segment++)
+    {
+      console.log("segment");
+      console.log(segment);
+      console.log(hex[i]);
+      console.log("seg");
+      console.log($("#hex"+i+"-"+segment));
+      if (hex[i][segment])
+      {
+        console.log("add class");
+        $("#hex"+i+"-"+segment).addClass("on");
+      }
+      else
+      {
+        $("#hex"+i+"-"+segment).removeClass("on");
+      }
+    }
   }
+  // for (var i=0; i<hex.length; i++)
+  // {
+  //   update_fill(hex[i], "#hex"+i+"-", "red");
+  // }
   //update_fill(inputs["sw"], "#sw", "grey");
   update_fill(inputs["key"], "#key", "grey");
   for (var i=0; i<inputs["sw"].length; i++){
@@ -35,12 +59,10 @@ function update_fills(data) {
        $("#inner_sw"+i).animate({ 'marginTop': "+=15" });
        $("#inner_sw"+i).toggleClass('on');
      }
-        
+
       }
-    
   }
 }
-
 
 var board = {
   init: function() {
@@ -75,7 +97,7 @@ var board = {
     console.log("WebSocket Closed");
     $("#status").text("Status: Dead");
     $("#status").css('color', 'red');
-    init_ws(url);
+    this.init_ws(url);
   };
 }
 };

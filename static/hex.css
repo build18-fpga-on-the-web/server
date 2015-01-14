@@ -1,0 +1,140 @@
+#hex {
+    width:50%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+}
+
+.hex-digit {
+    position: relative;
+    height: 125px;
+    width: 50px;
+    display: inline-block;
+}
+
+.s0{
+  position: absolute;
+  left: 10px;
+  height: 0;
+  width: 25px;
+  border-top: 15px solid #222;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.s0.on {
+    border-top-color: red;
+}
+
+.s1 {
+  position: absolute;
+  left: 55px;
+  top: 10px;
+  height: 25px;
+  width: 0;
+  border-right: 15px solid #222;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.s1.on {
+    border-right-color: red;
+}
+
+.s2 {
+  position: absolute;
+  left: 55px;
+  top: 75px;
+  height: 25px;
+  width: 0;
+  border-right: 15px solid #222;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.s2.on {
+    border-right-color: red;
+}
+
+.s3 {
+  position: absolute;
+  top: 120px;
+  left: 10px;
+  height: 0;
+  width: 25px;
+  border-bottom: 15px solid #222;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.s3.on {
+    border-bottom-color: red;
+}
+
+.s4 {
+  position: absolute;
+  left: 0;
+  top: 75px;
+  height: 25px;
+  width: 0;
+  border-left: 15px solid #222;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.s4.on {
+    border-left-color: red;
+}
+
+.s5 {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: 25px;
+  width: 0;
+  border-left: 15px solid #222;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.s5.on {
+    border-left-color: red;
+}
+
+.s6 {
+    position: absolute;
+    top: 60px;
+    left: 15px;
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    transform: scale(1.4);
+}
+
+.s6 .top {
+    height: 0;
+    width: 25px;
+    border-bottom: 7px solid #222;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+.s6 .bottom {
+    height: 0;
+    width: 25px;
+    border-top: 7px solid #222;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+.s6.on .top {
+    border-bottom-color: red;
+}
+
+.s6.on .bottom {
+    border-top-color: red;
+}
