@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: DS-DIGI;
     src: url(DS-DIGI.TTF);
@@ -17,10 +18,20 @@ h1 {
     background-color: grey;
 }
 
-.buttons{
-    border:solid black;
+
+.leds{
+    border: none;
     width:10px;
     height:10px;
+    display: inline-block;
+}
+
+.key{
+    margin-top: 0px;
+    border:solid blue;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
     display: inline-block;
 }
 
@@ -50,7 +61,7 @@ h1 {
 
 #ledr {
     width:70%;
-    margin-top: 25px;
+    margin-top: 30px;
 }
 
 #sw {
@@ -68,7 +79,7 @@ h1 {
 }
 
 .switch {
-    border:solid black;
+    border:solid white;
     border-radius: 10px;
     height: 30px;
     width: 15px;
@@ -99,9 +110,7 @@ h1 {
 }
 
 body {
-    /*background-image: url("testbg.png");*/
+    background-image: url("bg.png");
     background-color: #1a2b41;
-    background-repeat: no-repeat;
     background-position: center top;
 }
-
