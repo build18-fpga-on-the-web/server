@@ -29,6 +29,7 @@ sev_seg = \
 'e' : [ 1,  0, 0, 1,  1,  1,  1],
 'f' : [ 1,  0, 0, 0, 1,  1,  1]}
 
+counter = 0
 def num_to_segs(n):
     hexs = []
     for _ in range(8):
@@ -39,7 +40,7 @@ def num_to_segs(n):
 def init_outputs():
     outputs["ledr"] = [1]*18
     outputs["ledg"] = [1]*9
-    outputs["hex"] = [sev_seg[i] for i in range(8)]
+    outputs["hex"] = num_to_segs(counter)
 
 def init_inputs():
     inputs["sw"] = [1]*18
@@ -48,16 +49,17 @@ def init_inputs():
 class IndexHandler(RequestHandler):
     @asynchronous
     def get(request):
-        data = {"inputs":inputs, "outputs":outputs}
+        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
         request.render("index.html", data=data, num=num)
 
-counter = 0
 class WebSocketChatHandler(WebSocketHandler):
     def open(self, *args):
         print("open", "WebSocketChatHandler")
         clients.append(self)
-        data = {"inputs":inputs, "outputs":outputs}
-        self.write_message(json_encode(data))
+        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
+        for client in clients:
+            client.write_message(json_encode(data))
+
     def on_message(self, message):
         global counter
         print("Message from client")
@@ -76,12 +78,15 @@ class WebSocketChatHandler(WebSocketHandler):
             outputs["hex"] = num_to_segs(counter)
             counter += 1
             outputs["ledr"] = inputs["sw"]
-        data = {"inputs":inputs, "outputs":outputs}
+        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
         for client in clients:
             client.write_message(json_encode(data))
 
     def on_close(self):
         clients.remove(self)
+        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
+        for client in clients:
+            client.write_message(json_encode(data))
 
     def check_origin(self, origin):
         return True

@@ -18,22 +18,22 @@ function update_fills(data) {
   update_fill(outputs["ledr"], "#ledr", "red");
   update_fill(outputs["ledg"], "#ledg", "green");
   var hex = outputs["hex"];
-  console.log(hex);
-  console.log(hex.length);
+  // console.log(hex);
+  // console.log(hex.length);
   for (var i=0; i<hex.length; i++)
   {
-    console.log("i");
-    console.log(i);
+    // console.log("i");
+    // console.log(i);
     for (var segment=0; segment<7; segment++)
     {
-      console.log("segment");
-      console.log(segment);
-      console.log(hex[i]);
-      console.log("seg");
-      console.log($("#hex"+i+"-"+segment));
+      // console.log("segment");
+      // console.log(segment);
+      // console.log(hex[i]);
+      // console.log("seg");
+      // console.log($("#hex"+i+"-"+segment));
       if (hex[i][segment])
       {
-        console.log("add class");
+        // console.log("add class");
         $("#hex"+i+"-"+segment).addClass("on");
       }
       else
@@ -219,8 +219,10 @@ var board = {
       // console.log("new message");
       // console.log(e);
       // console.log(typeof(e.data));
-      // console.log(e.data);
+      console.log(e.data);
+
       data = JSON.parse(e.data);
+      $("#status").text("Status: Live("+data.clients+")");
       update_fills(data);
   };
 
