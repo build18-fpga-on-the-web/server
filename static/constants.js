@@ -2,4 +2,4 @@
  * constants.js
  */
 
-var WS_URL = "ws://localhost:8081/chat";
+var WS_URL = "ws://128.237.196.97:8081/chat";

@@ -48,6 +48,7 @@ function keyPress(e){
     case 49:
       if (down['49'] == null){
         down['49'] = true;
+        $("#key0").css("background-color", "white");
         ws.send("key"+(e.keyCode-49)); 
       }
       break;
@@ -55,27 +56,48 @@ function keyPress(e){
       if (down['50'] == null){
         ws.send("key"+(e.keyCode-49)); 
         down['50'] = true;
+        $("#key1").css("background-color", "white");
       }
       break;
     case 51:
       if (down['51'] == null){
         ws.send("key"+(e.keyCode-49)); 
         down['51'] = true;
+        $("#key2").css("background-color", "white");
       }
       break;
     case 52:
       if (down['52'] == null){
         ws.send("key"+(e.keyCode-49)); 
         down['52'] = true;
+        $("#key3").css("background-color", "white");
       }
       break;
   }
 }
 
 function keyRelease(e){
-  if (e.keyCode>=49 && e.keyCode<=52){
-    ws.send("key"+(e.keyCode-49));
-    down[e.keyCode] = null;
+  switch (e.keyCode){
+    case 49:
+      $("#key0").css("background-color", "grey");
+      ws.send("key0");
+      down['49'] = null; 
+      break;
+    case 50:
+      $("#key1").css("background-color", "grey");
+      ws.send("key1");
+      down['50'] = null;
+      break;
+    case 51:
+      $("#key2").css("background-color", "grey");
+      ws.send("key2");
+      down['51'] = null;
+      break;
+    case 52:
+      $("#key3").css("background-color", "grey");
+      ws.send("key3");
+      down['52'] = null;
+      break;
   }
 }
 
@@ -83,24 +105,28 @@ function buttonPress(e){
   switch (e.target.id){
     case "key0":
       if (down['49'] == null){
+        $("#key0").css("background-color", "white");
         down['49'] = true;
         ws.send("key0"); 
       }
       break;
     case "key1":
       if (down['50'] == null){
+        $("#key1").css("background-color", "white");
         ws.send("key1"); 
         down['50'] = true;
       }
       break;
     case "key2":
       if (down['51'] == null){
+        $("#key2").css("background-color", "white");
         ws.send("key2"); 
         down['51'] = true;
       }
       break;
     case "key3":
       if (down['52'] == null){
+        $("#key3").css("background-color", "white");
         ws.send("key3"); 
         down['52'] = true;
       }
@@ -109,22 +135,28 @@ function buttonPress(e){
 }
 
 function buttonRelease(e){
-  if (e.target.id == "key0"){
-    ws.send("key0");
-    down['49'] = null; 
-  }
-  else if (e.target.id == "key1"){
-    ws.send("key1");
-    down['50'] = null;
-  }
-  else if (e.target.id == "key2"){
-    ws.send("key2");
-    down['51'] = null;
-  }
 
-  else if (e.target.id == "key3"){
-    ws.send("key3");
-    down['52'] = null;
+  switch (e.target.id){
+    case "key0":
+      $("#key0").css("background-color", "grey");
+      ws.send("key0");
+      down['49'] = null; 
+      break;
+    case "key1":
+      $("#key1").css("background-color", "grey");
+      ws.send("key1");
+      down['50'] = null;
+      break;
+    case "key2":
+      $("#key2").css("background-color", "grey");
+      ws.send("key2");
+      down['51'] = null;
+      break;
+    case "key3":
+      $("#key3").css("background-color", "grey");
+      ws.send("key3");
+      down['52'] = null;
+      break;
   }
 }
 
@@ -135,6 +167,16 @@ var board = {
     //console.log("Initializing board");
     this.init_ws(WS_URL);
     $(".switch").click(function() {
+      console.log(this);
+      var sw = $(this).children()[0];
+      console.log(sw);
+      $(sw).toggleClass('on');
+      if ($(sw).hasClass('on')){
+       $(sw).animate({ 'marginTop': "-=15" });
+     }
+     else{
+      $(sw).animate({ 'marginTop': "+=15" });
+     }
       ws.send(this.id);
     });
     $(document).keydown(keyPress);
