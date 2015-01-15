@@ -11,6 +11,6 @@ $ pip3 install -r requirements.txt
 
 ###Running
 ```
-$ python boxes.py
+$ python server.py
 ```
 	
