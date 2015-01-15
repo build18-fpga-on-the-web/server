@@ -5,6 +5,7 @@ from tornado.escape import json_encode
 from fpga_process import FPGAProcess
 
 import os.path
+import uuid
 from multiprocessing import Queue
 
 # Global variables shared between clients
@@ -55,6 +56,19 @@ class IndexHandler(RequestHandler):
         data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
         request.render("index.html", data=data, num=num)
 
+__UPLOADS__ = "uploads/"
+
+class UploadHandler(RequestHandler):
+    def post(self):
+        fileinfo = self.request.files['filearg'][0]
+        print("fileinfo is", fileinfo)
+        fname = fileinfo['filename']
+        extn = os.path.splitext(fname)[1]
+        cname = str(uuid.uuid4()) + extn
+        fh = open(__UPLOADS__ + cname, 'wb')
+        fh.write(fileinfo['body'])
+        self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
+
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
     for client in clients:
@@ -103,7 +117,8 @@ def main():
     app = Application(
         [
             (r'/chat', WebSocketChatHandler),
-            (r'/', IndexHandler)
+            (r'/', IndexHandler),
+            (r'/upload', UploadHandler)
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
