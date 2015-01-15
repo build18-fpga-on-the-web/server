@@ -230,7 +230,7 @@ var board = {
     //console.log("WebSocket Closed");
     $("#status").text("Status: Dead");
     $("#status").css('color', 'red');
-    this.init_ws(url);
+    this.init_ws(WS_URL);
   };
 }
 };

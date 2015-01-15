@@ -1,14 +1,17 @@
-from tornado.ioloop import IOLoop
+from tornado.ioloop import IOLoop, PeriodicCallback
 from tornado.web import Application, RequestHandler, asynchronous
 from tornado.websocket import WebSocketHandler
 from tornado.escape import json_encode
+from fpga_process import FPGAProcess
 
 import os.path
+from multiprocessing import Queue
 
 # Global variables shared between clients
 clients = []
 outputs = {}
 inputs = {}
+inputQ = None
 num = {"ledr":18, "ledg":9, "hex":8, "segments":7, "sw":18, "key":4}
 
 sev_seg = \
@@ -34,7 +37,7 @@ def num_to_segs(n):
     hexs = []
     for _ in range(8):
         hexs.append(sev_seg[n%10])
-        n /= 10
+        n = n // 10
     return hexs
 
 def init_outputs():
@@ -43,8 +46,8 @@ def init_outputs():
     outputs["hex"] = num_to_segs(counter)
 
 def init_inputs():
-    inputs["sw"] = [1]*18
-    inputs["key"] = [1]*4
+    inputs["sw"] = [0]*18
+    inputs["key"] = [0]*4
 
 class IndexHandler(RequestHandler):
     @asynchronous
@@ -52,18 +55,18 @@ class IndexHandler(RequestHandler):
         data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
         request.render("index.html", data=data, num=num)
 
+def send_data():
+    data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
+    for client in clients:
+        client.write_message(json_encode(data))
+
 class WebSocketChatHandler(WebSocketHandler):
     def open(self, *args):
         print("open", "WebSocketChatHandler")
         clients.append(self)
-        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
-        for client in clients:
-            client.write_message(json_encode(data))
+        send_data()
 
     def on_message(self, message):
-        global counter
-        print("Message from client")
-        print(message)
         group = None
         if message.startswith("sw"):
             group = "sw"
@@ -75,23 +78,26 @@ class WebSocketChatHandler(WebSocketHandler):
             except ValueError:
                 print("int failed on", message)
             inputs[group][i] = 1 - inputs[group][i]
-            outputs["hex"] = num_to_segs(counter)
-            counter += 1
-            outputs["ledr"] = inputs["sw"]
-        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
-        for client in clients:
-            client.write_message(json_encode(data))
+        inputQ.put(inputs)
+        send_data()
 
     def on_close(self):
         clients.remove(self)
-        data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
-        for client in clients:
-            client.write_message(json_encode(data))
+        send_data()
 
     def check_origin(self, origin):
         return True
 
 def main():
+    global inputQ
+    global outputs
+    inputQ = Queue()
+    outputQ = Queue()
+
+    fp = FPGAProcess(inputQ, outputQ)
+    fp.daemon = True
+    fp.start()
+
     init_outputs()
     init_inputs()
     app = Application(
@@ -101,11 +107,23 @@ def main():
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
-        debug=True
+        debug=True,
         )
     app.listen(8081)
+
     print("Listening on port 8081")
-    IOLoop.instance().start()
+    def periodic_callback():
+        global outputs
+        if not outputQ.empty():
+            outputs = outputQ.get()
+            print("From output queue")
+            print(outputs)
+            send_data()
+
+    mainloop = IOLoop.instance()
+    scheduler = PeriodicCallback(periodic_callback, 10, io_loop = mainloop)
+    scheduler.start()
+    mainloop.start()
 
 if __name__ == "__main__":
     main()
