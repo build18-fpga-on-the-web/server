@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="{{ static_url("hex.css") }}" />
   </head>
   <body class="noselect">
-    <div id="upload">
-      <form enctype="multipart/form-data" action="/upload" method="post" id="upload-form">
-      File: <input type="file" name="filearg" />
-      <br />
-      <input type="submit" value="upload" />
-      </form>
+    <div id="start-screen" class="modalDialog active">
+      <div>
+        <div class="close" id="close">X</div>
+        <div id="demo1" class="demo"> Demo 1 </div>
+        <div id="demo2" class="demo"> Demo 2 </div>
+        <div id="demo3" class="demo"> Demo 3 </div>
+        <div id="demo4" class="demo"> Demo 4 </div>
+        <div id="upload">
+        <form enctype="multipart/form-data" action="/upload" method="post" id="upload-form">
+        File: <input type="file" name="filearg" />
+        <br />
+        <input type="submit" value="upload" />
+        </form>
+      </div>
+      </div>
     </div>
+
     <div id="status"></div>
     <div id="title">
-    <h1> FPGA ON THE WEB </h1>
+      <h1> FPGA ON THE WEB </h1>
     </div>
 
     <div id="buttons">
