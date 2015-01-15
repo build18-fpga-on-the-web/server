@@ -1,6 +1,5 @@
 import socket
 import time
-from fpga_process import FPGAProcess
 
 host = 'localhost'
 port = 2540
@@ -19,7 +18,6 @@ def ReadData(conn,IR,length):
 	conn.send("read " + bin(IR) + " " + bin(length) + '\n')
 	print "test\n"
 	print conn.recv(4096) + '\n'
-
 
 
 conn = Open(host, port)

@@ -9,4 +9,4 @@ $(document).ready(function() {
         $("#start-screen").removeClass("active");
     });
 });
-Ω
+

@@ -3,7 +3,7 @@ from tornado.web import Application, RequestHandler, asynchronous
 from tornado.websocket import WebSocketHandler
 from tornado.escape import json_encode
 from fpga_process import FPGAProcess
-
+from poll import JTAGPoller
 import os.path
 import uuid
 from multiprocessing import Queue
@@ -108,7 +108,9 @@ def main():
     inputQ = Queue()
     outputQ = Queue()
 
-    fp = FPGAProcess(inputQ, outputQ)
+    #fp = FPGAProcess(inputQ, outputQ)
+    fp = JTAGPoller(inputQ, outputQ)
+
     fp.daemon = True
     fp.start()
 
