@@ -12,6 +12,7 @@ from multiprocessing import Queue
 clients = []
 outputs = {}
 inputs = {}
+files = []
 inputQ = None
 num = {"ledr":18, "ledg":9, "hex":8, "segments":7, "sw":18, "key":4}
 
@@ -68,6 +69,9 @@ class UploadHandler(RequestHandler):
         fh = open(__UPLOADS__ + cname, 'wb')
         fh.write(fileinfo['body'])
         self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
+        for filename in os.listdir(__UPLOADS__):
+            print(filename)
+            files.append(filename)
 
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}

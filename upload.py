@@ -9,7 +9,7 @@ class Userform(tornado.web.RequestHandler):
     def get(self):
         self.render("fileuploadform.html")
 
-
+items = []
 class Upload(tornado.web.RequestHandler):
     def post(self):
         fileinfo = self.request.files['filearg'][0]
@@ -20,6 +20,7 @@ class Upload(tornado.web.RequestHandler):
         fh = open(__UPLOADS__ + cname, 'wb')
         fh.write(fileinfo['body'])
         self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
+
 
 
 application = tornado.web.Application([
