@@ -4,4 +4,9 @@ $(document).ready(function() {
     $("#close").click(function() {
         $("#start-screen").removeClass("active");
     });
+
+    $(".demo").click(function() {
+        $("#start-screen").removeClass("active");
+    });
 });
+Ω
