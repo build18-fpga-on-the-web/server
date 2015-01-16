@@ -87,7 +87,7 @@ class UploadHandler(RequestHandler):
         if not top_module:
             self.my_error("Include a top module name")
             return
-        self.finish({"error":False, "message":(fname + " is uploaded!! Check %s folder" %__UPLOADS__)})
+        self.finish({"error":False, "fname":fname})
         command = ("./foo.sh '%s' %s"  % (fname, top_module))
         subprocess.call(command, shell=True)
 
