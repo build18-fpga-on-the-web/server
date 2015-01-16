@@ -178,8 +178,6 @@ def main():
         if not outputQ.empty():
             print("outputQ--")
             outputs = outputQ.get()
-            # print("From output queue")
-            # print(outputs)
             send_data()
 
     mainloop = IOLoop.instance()
