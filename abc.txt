@@ -1,0 +1,3 @@
+foo.sh called with
+ssh with kerberos.txt
+afsd

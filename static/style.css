@@ -217,3 +217,7 @@ body {
     background-color: #1a2b41;
     background-position: center top;
 }
+
+#form-error {
+    margin-top:25px;
+}

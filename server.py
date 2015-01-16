@@ -13,27 +13,31 @@ import subprocess
 clients = []
 outputs = {}
 inputs = {}
-files = []
 inputQ = None
 num = {"ledr":18, "ledg":9, "hex":8, "segments":7, "sw":18, "key":4}
 
 sev_seg = \
-{0 : [ 1,  1,  1,  1,  1,  1,  0],
-1 : [ 0, 1,  1,  0, 0, 0, 0],
-2 : [ 1,  1,  0, 1,  1,  0, 1],
-3 : [ 1,  1,  1,  1,  0, 0, 1],
-4 : [ 0, 1,  1,  0, 0, 1,  1],
-5 : [ 1,  0, 1,  1,  0, 1,  1],
-6 : [ 1,  0, 1,  1,  1,  1,  1],
-7 : [ 1,  1,  1,  0, 0, 1,  0],
-8 : [ 1,  1,  1,  1,  1,  1,  1],
-9 : [ 1,  1,  1,  1,  0, 1,  1],
-'a' : [ 1,  1,  1,  0, 1,  1,  1],
-'b' : [ 0, 0, 1,  1,  1,  1,  1],
-'c' : [ 1,  0, 0, 1,  1,  1,  0],
-'d' : [ 0, 1,  1,  1,  1,  0, 1],
-'e' : [ 1,  0, 0, 1,  1,  1,  1],
-'f' : [ 1,  0, 0, 0, 1,  1,  1]}
+{0 : [ 1, 1, 1, 1, 1, 1, 0],
+1 : [ 0, 1, 1, 0, 0, 0, 0],
+2 : [ 1, 1, 0, 1, 1, 0, 1],
+3 : [ 1, 1, 1, 1, 0, 0, 1],
+4 : [ 0, 1, 1, 0, 0, 1, 1],
+5 : [ 1, 0, 1, 1, 0, 1, 1],
+6 : [ 1, 0, 1, 1, 1, 1, 1],
+7 : [ 1, 1, 1, 0, 0, 1, 0],
+8 : [ 1, 1, 1, 1, 1, 1, 1],
+9 : [ 1, 1, 1, 1, 0, 1, 1],
+'a' : [ 1, 1, 1, 0, 1, 1, 1],
+'b' : [ 0, 0, 1, 1, 1, 1, 1],
+'c' : [ 1, 0, 0, 1, 1, 1, 0],
+'d' : [ 0, 1, 1, 1, 1, 0, 1],
+'e' : [ 1, 0, 0, 1, 1, 1, 1],
+'f' : [ 1, 0, 0, 0, 1, 1, 1],
+'u' : [ 0, 1, 1, 1, 1, 1, 0],
+'L' : [ 0, 0, 0, 1, 1, 1, 0],
+'d' : [ 0, 1, 1, 1, 1, 0, 1],
+'i' : [ 0, 0, 1, 0, 0, 0, 0],
+' ' : [0]*7}
 
 counter = 0
 def num_to_segs(n):
@@ -46,7 +50,7 @@ def num_to_segs(n):
 def init_outputs():
     outputs["ledr"] = [0]*18
     outputs["ledg"] = [0]*9
-    outputs["hex"] = [[0]*7 for _ in range(8)]
+    outputs["hex"] = [sev_seg[c] for c in (list("buiLd ") + [1,8])]
 
 def init_inputs():
     inputs["sw"] = [0]*18
@@ -62,26 +66,17 @@ __UPLOADS__ = "uploads/"
 
 class UploadHandler(RequestHandler):
     def post(self):
-        fileinfo = self.request.files['filearg'][0]
-        # print("fileinfo is", fileinfo)
-        fname = fileinfo['filename']
-        fh = open(__UPLOADS__ + fname, 'wb')
-        fh.write(fileinfo['body'])
-        print("1")
-        self.finish(fname + " is uploaded!! Check %s folder" %__UPLOADS__)
-        print("2")
-        command = "./foo.sh %s" %fname
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        process.wait()
-        print("4")
-        for filename in os.listdir(__UPLOADS__):
-            # print(filename)
-            files.append(filename)
-
-
-
-
-
+        try:
+            fileinfo = self.request.files['filearg'][0]
+            fname = fileinfo['filename']
+            fh = open(__UPLOADS__ + fname, 'wb')
+            fh.write(fileinfo['body'])
+            self.finish({"error":False, "message":(fname + " is uploaded!! Check %s folder" %__UPLOADS__)})
+            top_module = self.get_argument('top')
+            command = ("./foo.sh '%s' %s"  % (fname, top_module))
+            subprocess.call(command, shell=True)
+        except:
+            self.write({"error":True, "message":"you fucked up!!!"})
 
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
@@ -123,7 +118,7 @@ def main():
     inputQ = Queue()
     outputQ = Queue()
 
-    DEBUG = False
+    DEBUG = True
     if DEBUG:
         fp = FPGAProcess(inputQ, outputQ)
     else:
