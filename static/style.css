@@ -95,6 +95,7 @@ form {
     margin:auto;
     width:600px;
     height:100px;
+    margin-top: 120px;
     /*background-color: grey;*/
 }
 
@@ -145,12 +146,16 @@ form {
 }
 
 #ledr {
-    width:75%;
+    width:900px;
     margin-top: 30px;
 }
 
+.ledrw{
+    width:34px;
+}
+
 #sw {
-	width:75%;
+	width:900px;
 	margin-top: 25px;
 }
 
@@ -161,6 +166,10 @@ form {
     width:15px;
     height:15px;
     margin-top:15px;
+}
+
+.sww{
+    width:34px;
 }
 
 .switch {
@@ -314,3 +323,26 @@ button:focus {
     font-size: 15px;
     text-shadow: 2px 2px 2px #000000;
 }
+
+#buttons:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  margin: auto;
+  margin-top:-30px;
+  
+  display: block;
+  background-color: rgba(115,115,115,.5);
+  width: 1000px;
+  height: 510px;
+  
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+
