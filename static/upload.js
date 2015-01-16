@@ -12,6 +12,8 @@ $(document).ready(function() {
         {
             console.log("GOOD!");
             $("#start-screen").removeClass("active");
+            $("#running").text("Status: Live");
+      		$("#running").css('color', 'LawnGreen');
         }
 
     }
