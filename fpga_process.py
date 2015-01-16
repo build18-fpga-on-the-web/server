@@ -19,10 +19,13 @@ sev_seg = \
 'e' : [ 1,  0, 0, 1,  1,  1,  1],
 'f' : [ 1,  0, 0, 0, 1,  1,  1]}
 
+def flip(n):
+    return 1 - n
+
 def num_to_segs(n):
     hexs = []
     for _ in range(8):
-        hexs.append(sev_seg[n%10])
+        hexs.append(list(map(flip, sev_seg[n%10])))
         n = n // 10
     return hexs
 

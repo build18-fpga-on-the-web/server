@@ -43,9 +43,9 @@ def num_to_segs(n):
     return hexs
 
 def init_outputs():
-    outputs["ledr"] = [1]*18
-    outputs["ledg"] = [1]*9
-    outputs["hex"] = num_to_segs(counter)
+    outputs["ledr"] = [0]*18
+    outputs["ledg"] = [0]*9
+    outputs["hex"] = [[0]*7 for _ in range(8)]
 
 def init_inputs():
     inputs["sw"] = [0]*18
@@ -62,7 +62,7 @@ __UPLOADS__ = "uploads/"
 class UploadHandler(RequestHandler):
     def post(self):
         fileinfo = self.request.files['filearg'][0]
-        print("fileinfo is", fileinfo)
+        # print("fileinfo is", fileinfo)
         fname = fileinfo['filename']
         extn = os.path.splitext(fname)[1]
         cname = str(uuid.uuid4()) + extn
@@ -70,8 +70,10 @@ class UploadHandler(RequestHandler):
         fh.write(fileinfo['body'])
         self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
         for filename in os.listdir(__UPLOADS__):
-            print(filename)
+            # print(filename)
             files.append(filename)
+
+
 
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
@@ -80,7 +82,7 @@ def send_data():
 
 class WebSocketChatHandler(WebSocketHandler):
     def open(self, *args):
-        print("open", "WebSocketChatHandler")
+        # print("open", "WebSocketChatHandler")
         clients.append(self)
         send_data()
 
@@ -112,8 +114,11 @@ def main():
     inputQ = Queue()
     outputQ = Queue()
 
-    #fp = FPGAProcess(inputQ, outputQ)
-    fp = JTAGPoller(inputQ, outputQ)
+    DEBUG = False
+    if DEBUG:
+        fp = FPGAProcess(inputQ, outputQ)
+    else:
+        fp = JTAGPoller(inputQ, outputQ)
 
     fp.daemon = True
     fp.start()
@@ -137,8 +142,8 @@ def main():
         global outputs
         if not outputQ.empty():
             outputs = outputQ.get()
-            print("From output queue")
-            print(outputs)
+            # print("From output queue")
+            # print(outputs)
             send_data()
 
     mainloop = IOLoop.instance()

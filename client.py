@@ -13,5 +13,5 @@ while True:
     result =  ws.recv()
     print("Received '%s'" % result)
     sw = (sw + 1)%18
-    time.sleep(0.1)
+    time.sleep(0.3)
 ws.close()

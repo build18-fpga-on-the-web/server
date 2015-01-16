@@ -21,9 +21,9 @@ class JTAGPoller(multiprocessing.Process):
         self.conn.connect((HOST, PORT))
 
     def sendData(self, IR, data, length):
-        print("sendData", data)
-        value = "".join(map(str, data)) # convert int to a binary string
-        print(value)
+        # print("sendData", data)
+        value = "".join(map(str, list(reversed(data)))) # convert int to a binary string
+        # print(value)
         message = "send " + str(IR) + " " + str(value) + " " + str(length) + '\n'
         # newline is required to flush the buffer on the Tcl server
         self.conn.send(message.encode())
@@ -36,10 +36,10 @@ class JTAGPoller(multiprocessing.Process):
         # print("message", type(message))
         self.conn.send(message.encode())
         data = self.conn.recv(4096).decode()
-        print("readData", data)
+        # print("readData", data)
         data = data.strip()
         data = list(map(int, data))
-        return data
+        return list(reversed(data))
 
     def closeSocket(self):
         self.conn.close()
@@ -57,7 +57,7 @@ class JTAGPoller(multiprocessing.Process):
                 self.sendData(11, task["sw"], self.DRlength[11])
                 self.sendData(12, task["key"], self.DRlength[12])
 
-                print("Sent to board: ", task)
+                # print("Sent to board: ", task)
 
             # poll board for inputs
             self.inputs = [self.readData(i, self.DRlength[i]) for i in range(1, 11)]
@@ -68,8 +68,8 @@ class JTAGPoller(multiprocessing.Process):
             self.inputs = inputD
             # check for differences and put an updated dict in the queue
             if (self.inputs != self.prevInputs):
-                print("SELF.INPUTS")
-                print(self.inputs)
+                # print("SELF.INPUTS")
+                # print(self.inputs)
 
                 self.resultQ.put(self.inputs)
                 self.prevInputs = self.inputs
