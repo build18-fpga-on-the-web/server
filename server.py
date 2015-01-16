@@ -64,19 +64,32 @@ class IndexHandler(RequestHandler):
 
 __UPLOADS__ = "uploads/"
 
+
 class UploadHandler(RequestHandler):
+    def my_error(self, message):
+        self.write({"error":True, "message":message})
+
     def post(self):
+        error = None
         try:
             fileinfo = self.request.files['filearg'][0]
-            fname = fileinfo['filename']
-            fh = open(__UPLOADS__ + fname, 'wb')
-            fh.write(fileinfo['body'])
-            self.finish({"error":False, "message":(fname + " is uploaded!! Check %s folder" %__UPLOADS__)})
-            top_module = self.get_argument('top')
-            command = ("./foo.sh '%s' %s"  % (fname, top_module))
-            subprocess.call(command, shell=True)
         except:
-            self.write({"error":True, "message":"you fucked up!!!"})
+            self.my_error("Submit a file")
+            return
+        fname = fileinfo['filename']
+        if not fname.endswith(".sv"):
+            print(fname)
+            self.my_error("File should end with .sv")
+            return
+        fh = open(__UPLOADS__ + fname, 'wb')
+        fh.write(fileinfo['body'])
+        top_module = self.get_argument('top')
+        if not top_module:
+            self.my_error("Include a top module name")
+            return
+        self.finish({"error":False, "message":(fname + " is uploaded!! Check %s folder" %__UPLOADS__)})
+        command = ("./foo.sh '%s' %s"  % (fname, top_module))
+        subprocess.call(command, shell=True)
 
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
@@ -118,7 +131,7 @@ def main():
     inputQ = Queue()
     outputQ = Queue()
 
-    DEBUG = True
+    DEBUG = False
     if DEBUG:
         fp = FPGAProcess(inputQ, outputQ)
     else:
