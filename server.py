@@ -96,6 +96,18 @@ class UploadHandler(RequestHandler):
         command = ("./foo.sh '%s' %s"  % (fname, top_module))
         subprocess.call(command, shell=True)
 
+class DemoHandler(RequestHandler):
+    def my_error(self, message):
+        self.write({"error":True, "message":message})
+
+    def post(self):
+        error = None
+        demo = self.get_argument('demo')
+        fname = demo + ".sv"
+        self.finish({"error":False, "fname":fname})
+        command = ("./foo.sh '%s' %s"  % (fname, "top"))
+        subprocess.call(command, shell=True)
+
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
     for client in clients:
@@ -151,7 +163,8 @@ def main():
         [
             (r'/chat', WebSocketChatHandler),
             (r'/', IndexHandler),
-            (r'/upload', UploadHandler)
+            (r'/upload', UploadHandler),
+            (r'/demo', DemoHandler)
         ],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),

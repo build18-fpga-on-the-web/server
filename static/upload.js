@@ -12,7 +12,7 @@ $(document).ready(function() {
         {
             console.log("GOOD!");
             $("#start-screen").removeClass("active");
-            $("#running").text("Running \"" + response["fname"] + ".\"");
+            $("#running").text("Running \"" + response["fname"] + "\"");
       		$("#running").css('color', 'White');
       		$("#form-error").text("");
         }
