@@ -22,7 +22,7 @@
         <div id="upload">
           <form enctype="multipart/form-data" action="/upload" method="post" id="upload-form">
             <input type="file" name="filearg" id="file-input"/>
-            <input type="button" id="browseButton" value="Choose File" />
+            <input type="button" id="browseButton" value="Choose File" class="someButtons"/>
             <input type="text" id="filename" readonly/>
             <br>
             <label for="top" id="file-label">Top Module </label>
@@ -35,6 +35,7 @@
       </div>
     </div>
 
+    <input type="button" id="changeButton" value="Change File" class="someButtons"/>
     <div id="running"></div>
     <div id="status"></div>
     <div id="title">

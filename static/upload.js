@@ -12,8 +12,9 @@ $(document).ready(function() {
         {
             console.log("GOOD!");
             $("#start-screen").removeClass("active");
-            $("#running").text("Status: Live");
-      		$("#running").css('color', 'LawnGreen');
+            $("#running").text("Running \"" + response["fname"] + ".\"");
+      		$("#running").css('color', 'White');
+      		$("#form-error").text("");
         }
 
     }

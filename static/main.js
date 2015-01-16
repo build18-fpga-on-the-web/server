@@ -13,6 +13,10 @@ $(document).ready(function() {
     $('#browseButton').click(function(){
         $('#file-input').click();
     });
+
+    $('#changeButton').click(function(){
+        $("#start-screen").addClass("active");
+    });
     
     $('#file-input').change(function(){
         var filename = $(this).val().replace(/C:\\fakepath\\/i, '')
