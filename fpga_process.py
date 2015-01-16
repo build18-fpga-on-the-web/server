@@ -55,9 +55,7 @@ class FPGAProcess(multiprocessing.Process):
         switches = inputs.get("sw", [0]*18)
         outputs["ledr"] = switches
         outputs["ledg"] = inputs.get("key", [0]*4)*2 + [1]
-        outputs["hex"] = [sev_seg[c] for c in reversed(list("buiLd ") + [1,8])]
-        outputs["hex"] = flip_hex(outputs["hex"])
-        #num_to_segs(sw_to_hex(switches))
+        outputs["hex"] = num_to_segs(sw_to_hex(switches))
         return outputs
 
     def run(self):

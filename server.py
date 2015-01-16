@@ -148,7 +148,7 @@ def main():
     inputQ = Queue()
     outputQ = Queue()
 
-    DEBUG = False
+    DEBUG = True
     if DEBUG:
         fp = FPGAProcess(inputQ, outputQ)
     else:

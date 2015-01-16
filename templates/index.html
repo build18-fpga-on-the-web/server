@@ -63,7 +63,7 @@
 
       <div id="ledr" class="group">
         {% for i in reversed(range(num["ledr"])) %}
-          <div id="ledr{{ i }}wrapper" class="wrapper">
+          <div id="ledr{{ i }}wrapper" class="wrapper ledrw">
             <div id="ledr{{ i }}" class="leds ledr" ></div>
             <br>
             LED
@@ -75,7 +75,7 @@
 
        <div id="sw" class="group">
         {% for i in reversed(range(num["sw"])) %}
-          <div id="ledr{{ i }}wrapper" class="wrapper">
+          <div id="sw{{ i }}wrapper" class="wrapper sww">
             <div id ="sw{{ i }}" class="switch">
               <div id="inner_sw{{ i }}" class="sw buttons" ></div>
             </div>
