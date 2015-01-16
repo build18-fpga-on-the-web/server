@@ -20,7 +20,7 @@
   left: 10px;
   height: 0;
   width: 25px;
-  border-top: 15px solid #222;
+  border-top: 15px solid #333;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
 }
@@ -35,7 +35,7 @@
   top: 10px;
   height: 25px;
   width: 0;
-  border-right: 15px solid #222;
+  border-right: 15px solid #333;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -50,7 +50,7 @@
   top: 75px;
   height: 25px;
   width: 0;
-  border-right: 15px solid #222;
+  border-right: 15px solid #333;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -65,7 +65,7 @@
   left: 10px;
   height: 0;
   width: 25px;
-  border-bottom: 15px solid #222;
+  border-bottom: 15px solid #333;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
 }
@@ -80,7 +80,7 @@
   top: 75px;
   height: 25px;
   width: 0;
-  border-left: 15px solid #222;
+  border-left: 15px solid #333;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -95,7 +95,7 @@
   top: 10px;
   height: 25px;
   width: 0;
-  border-left: 15px solid #222;
+  border-left: 15px solid #333;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -118,7 +118,7 @@
 .s6 .top {
     height: 0;
     width: 25px;
-    border-bottom: 7px solid #222;
+    border-bottom: 7px solid #333;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
 }
@@ -126,7 +126,7 @@
 .s6 .bottom {
     height: 0;
     width: 25px;
-    border-top: 7px solid #222;
+    border-top: 7px solid #333;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
 }
