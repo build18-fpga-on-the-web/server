@@ -16,6 +16,38 @@ h1 {
     width:50%;
     margin:auto;
 }*/
+form {
+    text-align: center;
+    width:400px;
+    margin:auto;
+}
+
+/*form:first-child {
+    display:inline-block;
+}*/
+
+#file-input {
+    margin-right:-50px;
+    margin-top: 25px;
+}
+
+#file-label {
+    width:25%;
+    margin-top: 25px;
+}
+
+
+#top-input {
+    width:25%;
+    margin-top: 25px;
+}
+
+
+#submit-button {
+    width:75px;
+    margin-top: 25px;
+}
+
 
 
 .demo {
@@ -49,7 +81,8 @@ h1 {
 }
 
 .modalDialog > div {
-    width: 400px;
+    width: 500px;
+    height: 250px;
     position: relative;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
@@ -58,6 +91,7 @@ h1 {
     background: -moz-linear-gradient(#fff, #999);
     background: -webkit-linear-gradient(#fff, #999);
     background: -o-linear-gradient(#fff, #999);
+    text-align: center;
 }
 .close {
     background: #606061;

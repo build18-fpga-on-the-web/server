@@ -11,7 +11,7 @@
       <div>
         <div class="close" id="close">X</div>
         <div id="demos">
-          {% for i in range(1,5) %}
+          {% for i in range(1,6) %}
             <a href="javaScript:void(0);" >
               <div id="demo{{i}}" class="demo"> Demo {{i}} </div>
             </a>
@@ -19,12 +19,14 @@
         </div>
         <div id="upload">
           <form enctype="multipart/form-data" action="/upload" method="post" id="upload-form">
-          <input type="file" name="filearg" />
-          <label for="top">Top Module </label>
-          <input type="text" name="top"/>
-          <input type="submit" value="upload" />
-        </form>
-      </div>
+            <input type="file" name="filearg" id="file-input"/>
+            <br>
+            <label for="top" id="file-label">Top Module </label>
+            <input type="text" name="top" id="top-input"/>
+            <br>
+            <input type="submit" value="upload" id="submit-button"/>
+          </form>
+        </div>
       </div>
     </div>
 

@@ -75,6 +75,9 @@ class UploadHandler(RequestHandler):
 
 
 
+
+
+
 def send_data():
     data = {"inputs":inputs, "outputs":outputs, "clients":len(clients)}
     for client in clients:
@@ -99,6 +102,7 @@ class WebSocketChatHandler(WebSocketHandler):
                 print("int failed on", message)
             inputs[group][i] = 1 - inputs[group][i]
         inputQ.put(inputs)
+        print("inputQ++")
         send_data()
 
     def on_close(self):
@@ -141,6 +145,7 @@ def main():
     def periodic_callback():
         global outputs
         if not outputQ.empty():
+            print("outputQ--")
             outputs = outputQ.get()
             # print("From output queue")
             # print(outputs)

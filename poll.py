@@ -6,10 +6,10 @@ PORT = 2540
 
 class JTAGPoller(multiprocessing.Process):
 
-    def __init__(self, taskQ, resultQ):
+    def __init__(self, inputQ, outputQ):
         multiprocessing.Process.__init__(self)
-        self.taskQ = taskQ
-        self.resultQ = resultQ
+        self.inputQ = inputQ
+        self.outputQ = outputQ
         self.DRlength = [0, 18, 9, 7, 7, 7, 7, 7, 7, 7, 7, 18, 4]
         self.firstRun = True
         self.inputs = [None]*13
@@ -50,8 +50,9 @@ class JTAGPoller(multiprocessing.Process):
 
         while True:
             # look for incoming tornado request
-            if not self.taskQ.empty():
-                task = self.taskQ.get()
+            if not self.inputQ.empty():
+                task = self.inputQ.get()
+                print("inputQ--")
 
                 # parse SW and KEY data out of dict and send
                 self.sendData(11, task["sw"], self.DRlength[11])
@@ -71,6 +72,7 @@ class JTAGPoller(multiprocessing.Process):
                 # print("SELF.INPUTS")
                 # print(self.inputs)
 
-                self.resultQ.put(self.inputs)
+                self.outputQ.put(self.inputs)
+                print("outputQ++")
                 self.prevInputs = self.inputs
 
