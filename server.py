@@ -33,13 +33,18 @@ sev_seg = \
 'd' : [ 0, 1, 1, 1, 1, 0, 1],
 'e' : [ 1, 0, 0, 1, 1, 1, 1],
 'f' : [ 1, 0, 0, 0, 1, 1, 1],
-'u' : [ 0, 1, 1, 1, 1, 1, 0],
-'L' : [ 0, 0, 0, 1, 1, 1, 0],
+'u' : [ 0, 0, 1, 1, 1, 0, 0],
+'L' : [ 0, 1, 1, 0, 0, 0, 0],
 'd' : [ 0, 1, 1, 1, 1, 0, 1],
 'i' : [ 0, 0, 1, 0, 0, 0, 0],
 ' ' : [0]*7}
 
-counter = 0
+def flip(n):
+    return 1 - n
+
+def flip_hex(hex):
+    return [list(map(flip, seg)) for seg in hex]
+
 def num_to_segs(n):
     hexs = []
     for _ in range(8):
@@ -50,8 +55,8 @@ def num_to_segs(n):
 def init_outputs():
     outputs["ledr"] = [0]*18
     outputs["ledg"] = [0]*9
-    outputs["hex"] = [sev_seg[c] for c in (list("buiLd ") + [1,8])]
-
+    outputs["hex"] = [sev_seg[c] for c in reversed(list("buiLd ") + [1,8])]
+    outputs["hex"] = flip_hex(outputs["hex"])
 def init_inputs():
     inputs["sw"] = [0]*18
     inputs["key"] = [0]*4
