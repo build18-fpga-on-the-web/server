@@ -9,6 +9,12 @@ function update_fill(data, class_name, color) {
     fill = (data[i]) ? color : "white";
     id = class_name + i;
     $(id).css("background-color", fill);
+    if (data[i]){
+      $(id).addClass("on")
+    }
+    else{
+      $(id).removeClass("on")
+    }
   }
 }
 
