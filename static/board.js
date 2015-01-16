@@ -56,29 +56,29 @@ function keyPress(e){
     case 49:
       if (down['49'] == null){
         down['49'] = true;
-        $("#key0").css("background-color", "white");
-        ws.send("key"+(e.keyCode-49));
+        $("#key3").css("background-color", "white");
+        ws.send("key3");
       }
       break;
     case 50:
       if (down['50'] == null){
-        ws.send("key"+(e.keyCode-49));
+        ws.send("key2");
         down['50'] = true;
-        $("#key1").css("background-color", "white");
+        $("#key2").css("background-color", "white");
       }
       break;
     case 51:
       if (down['51'] == null){
-        ws.send("key"+(e.keyCode-49));
+        ws.send("key1");
         down['51'] = true;
-        $("#key2").css("background-color", "white");
+        $("#key1").css("background-color", "white");
       }
       break;
     case 52:
       if (down['52'] == null){
-        ws.send("key"+(e.keyCode-49));
+        ws.send("key0");
         down['52'] = true;
-        $("#key3").css("background-color", "white");
+        $("#key0").css("background-color", "white");
       }
       break;
   }
@@ -87,23 +87,23 @@ function keyPress(e){
 function keyRelease(e){
   switch (e.keyCode){
     case 49:
-      $("#key0").css("background-color", "grey");
-      ws.send("key0");
+      $("#key3").css("background-color", "grey");
+      ws.send("key3");
       down['49'] = null;
       break;
     case 50:
-      $("#key1").css("background-color", "grey");
-      ws.send("key1");
+      $("#key2").css("background-color", "grey");
+      ws.send("key2");
       down['50'] = null;
       break;
     case 51:
-      $("#key2").css("background-color", "grey");
-      ws.send("key2");
+      $("#key1").css("background-color", "grey");
+      ws.send("key1");
       down['51'] = null;
       break;
     case 52:
-      $("#key3").css("background-color", "grey");
-      ws.send("key3");
+      $("#key0").css("background-color", "grey");
+      ws.send("key0");
       down['52'] = null;
       break;
   }

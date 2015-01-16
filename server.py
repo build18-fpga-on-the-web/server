@@ -7,6 +7,7 @@ from poll import JTAGPoller
 import os.path
 import uuid
 from multiprocessing import Queue
+import subprocess
 
 # Global variables shared between clients
 clients = []
@@ -64,11 +65,15 @@ class UploadHandler(RequestHandler):
         fileinfo = self.request.files['filearg'][0]
         # print("fileinfo is", fileinfo)
         fname = fileinfo['filename']
-        extn = os.path.splitext(fname)[1]
-        cname = str(uuid.uuid4()) + extn
-        fh = open(__UPLOADS__ + cname, 'wb')
+        fh = open(__UPLOADS__ + fname, 'wb')
         fh.write(fileinfo['body'])
-        self.finish(cname + " is uploaded!! Check %s folder" %__UPLOADS__)
+        print("1")
+        self.finish(fname + " is uploaded!! Check %s folder" %__UPLOADS__)
+        print("2")
+        command = "./foo.sh %s" %fname
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process.wait()
+        print("4")
         for filename in os.listdir(__UPLOADS__):
             # print(filename)
             files.append(filename)

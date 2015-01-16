@@ -1,2 +1,1 @@
-echo "hello"
-
+echo 'hi' > uploads/test.txt
